@@ -1,0 +1,40 @@
+extends ../layout
+
+block header
+  .ui.information.transition
+    h1.ui.inverted.header Upload your Jesus!
+
+block content
+  .ui.page.grid.stackable.segment
+    .row
+      .column
+        form#upload_form(action=" ")
+          .ui.error.form.segment
+            .field
+              label Title
+              input#image-title(placeholder='Describe yo Jesus!', type='text', name='title')
+            .field
+              label Image
+              img#image-preview(src='/images/default.png', class='ui image')
+              input(data-fp-button-class='ui black tiny button', type='filepicker-dragdrop', data-fp-multiple='true', id='image-location', onchange="updateImage()", name='image')
+            input.ui.blue.submit.button(type="submit")
+
+  script.
+    function updateImage(){
+      $('#image-preview').attr('src', $('#image-location').val())
+    }
+    $(document).ready(function(){
+      $('#upload_form').submit(function() {
+        $.ajax({
+          url: '/upload',
+          method: 'post',
+          data: {title: $('#image-title').val(), image: $('#image-location').val()}
+        }).done(function(data){
+          if(data.status == 'success')
+            window.location = '/uploads/'+data.result._id
+          else
+            console.log(data);
+        })
+        return false;
+      });
+    })

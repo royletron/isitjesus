@@ -1,0 +1,30 @@
+doctype 5
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width')
+    title= title
+    block css
+      link(rel='stylesheet', href='/components/semantic-ui/build/packaged/css/semantic.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+    block js
+      script(src='http://localhost:35729/livereload.js')
+      script(src='/components/jquery/dist/jquery.min.js')
+      script(src='/components/filepicker/filepicker.min.js')
+      script.
+        filepicker.setKey('ApsLn8fiJSgmzI7jLj4rrz');
+  body(id='home')
+    .ui.inverted.page.grid.masthead.segment
+      .column
+        .inverted.secondary.pointing.ui.menu
+          .header.item IsItJesus?
+          .right.menu
+            a(class='item', href='/vote')
+            if !user
+              a(class='item', href='/auth/twitter') Login
+            else
+              a(class='item', href='/upload') Upload
+              a(class='item', href='/profile') #{user.name}
+              a(class='item', href='/logout') Logout
+        block header
+    block content

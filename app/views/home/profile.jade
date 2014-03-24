@@ -1,0 +1,16 @@
+extends ../layout
+
+block header
+  .ui.information.transition
+    h1.ui.inverted.header #{title}
+
+block content
+  .ui.page.grid.stackable.segment
+    .row
+      .column
+        .ui.list
+          each article in articles
+            .item
+              img.ui.avatar.image(src="#{article.image}") 
+              .content
+                .header <a href="/uploads/#{article._id}">#{article.title}</a>

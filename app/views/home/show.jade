@@ -1,0 +1,15 @@
+extends ../layout
+
+block header
+  .ui.information.transition
+    h1.ui.inverted.header #{title}
+
+block content
+  .ui.page.grid.stackable.segment
+    .ui.two.column.page.grid
+      .column
+        h2(style="text-align:center") Stats!
+        .ui.horizontal.divider
+          i.heart.icon
+      .column
+        img.rounded.ui.image(src='#{image}')
