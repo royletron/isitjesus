@@ -67,4 +67,4 @@ var app = express();
 require('./config/express')(app, config);
 require('./config/routes')(app);
 
-app.listen(config.port);
+app.listen(process.env.PORT || config.port);
