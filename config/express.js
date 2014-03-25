@@ -13,7 +13,7 @@ module.exports = function(app, config) {
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.cookieParser());
-    app.use(express.session({ secret: 'keyboard cat' }));
+    app.use(express.cookieSession({ secret: 'aaaarrrghhh keyboard cat', cookie: {maxAge: 60 * 60} }));
     // Initialize Passport!  Also use passport.session() middleware, to support
     // persistent login sessions (recommended).
     app.use(passport.initialize());
