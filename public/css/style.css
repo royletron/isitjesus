@@ -93,7 +93,8 @@ p a {
 }
 
 .masthead.segment .information {
-  margin: 3em 1em 1em 280px;
+  margin: 0;
+  text-align: center;
 }
 
 .masthead.segment .information p {

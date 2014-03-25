@@ -1,0 +1,22 @@
+extends ../layout
+
+block header
+  .ui.information.transition
+    h1.ui.inverted.header #{article.title}
+
+block content
+  .ui.page.grid.stackable.segment
+    .ui.two.column.page.grid
+      .column
+        h1 You said <strong>#{your_vote}<strong>
+        .ui.horizontal.divider
+          i.heart.icon
+        h2 #{results.true} #{your_vote == 'yes' ? 'also' : ''} said yes
+        .ui.green.progress
+          .bar(style="width:#{(results.true/(results.true + results.false))*100}%")
+        h2 #{results.false} #{your_vote == 'no' ? 'also' : ''} said no
+        .ui.red.progress
+          .bar(style="width:#{(results.false/(results.true + results.false))*100}%")
+
+      .column
+        img.rounded.ui.image(src='#{article.image}')

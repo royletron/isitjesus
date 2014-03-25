@@ -1,0 +1,16 @@
+extends ../layout
+
+block header
+  .ui.information.transition
+    h1.ui.inverted.header #{article.title}
+
+block content
+  .ui.page.grid.stackable.segment
+    .row
+      .column(style="text-align:center")
+        img.rounded.ui.image(src='#{article.image}')
+        h3 But is it Jesus?
+        .ui.buttons
+          a(href="/post_vote/#{article._id}/yes").ui.positive.button Yes
+          .or
+          a(href="/post_vote/#{article._id}/no").ui.negative.button No

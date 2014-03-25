@@ -9,6 +9,8 @@ module.exports = function(app){
   app.post('/upload', ensureAuthenticated, home.save)
   app.get('/uploads/:id', ensureAuthenticated, home.show)
   app.get('/profile', ensureAuthenticated, home.profile)
+  app.get('/vote', home.vote)
+  app.get('/post_vote/:article/:vote', home.post_vote)
 
   app.get('/auth/twitter',
     passport.authenticate('twitter'),

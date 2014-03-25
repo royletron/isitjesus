@@ -19,12 +19,12 @@ html(lang='en')
         .inverted.secondary.pointing.ui.menu
           .header.item IsItJesus?
           .right.menu
-            a(class='item', href='/vote')
+            a(class= title === 'Vote' ? 'item active' : 'item', href='/vote') <i class="comment icon"></i> Vote
             if !user
               a(class='item', href='/auth/twitter') Login
             else
-              a(class='item', href='/upload') Upload
-              a(class='item', href='/profile') #{user.name}
-              a(class='item', href='/logout') Logout
+              a(class= title === 'Upload new entry' ? 'item active' : 'item', href='/upload') <i class="add icon"></i> Upload
+              a(class= title === '#{user.name}' ? 'item active' : 'item', href='/profile') <i class="user icon"></i> #{user.name}
+              a(class='item', href='/logout') <i class="sign out icon"></i> Logout
         block header
     block content

@@ -1,5 +1,48 @@
 var mongoose = require('mongoose'),
-  Article = mongoose.model('Article');
+  _ = require('underscore'),
+  Article = mongoose.model('Article'),
+  Vote = mongoose.model('Vote');
+
+exports.vote = function(req, res){
+  Article.random(function(err, article) {
+    res.render('home/vote', {
+      title: 'Vote',
+      user: req.user,
+      article: article
+      })
+    });
+}
+
+exports.post_vote = function(req, res){
+  var ans = true
+  if(req.params.vote == 'no')
+    ans = false
+  var user = 'mystery'
+  if(req.user)
+    user = req.user._id
+  Vote.create({user: user, article: req.params.article, vote: ans }, function(err, result){
+    if(err) throw new Error('Problem casting vote');
+    Article.findOne({_id: req.params.article}, function(err, article){
+      if(err) throw new Error('Problem finding article after casting vote');
+      if(article)
+        Vote.find({article: article._id}, function(err, votes){
+          if(err) throw new Error('Problem finding cast votes on article');
+          results = _.groupBy(votes, function(vote){ return vote.vote })
+          results = {true: results.true ? results.true.length : 0, false: results.false ? results.false.length : 0}
+          console.log(results);
+          res.render('home/post_vote', {
+            title: 'Votes for #article.name',
+            user: req.user,
+            article: article,
+            results: results,
+            your_vote: req.params.vote
+          })
+        })
+      else
+        res.redirect('/404');
+    })
+  })
+}
 
 exports.index = function(req, res){
   res.render('home/index', {
