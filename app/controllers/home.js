@@ -46,7 +46,7 @@ exports.post_vote = function(req, res){
 
 exports.index = function(req, res){
   res.render('home/index', {
-    title: 'Generator-Express MVC',
+    title: 'Home',
     user: req.user
   });
 };
