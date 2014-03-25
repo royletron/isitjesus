@@ -4,6 +4,15 @@ module.exports = function(app){
 
 	//home route
 	var home = require('../app/controllers/home');
+
+  app.get('/*', function(req, res, next) {
+    if (req.headers.host.match(/^www\./) != null) {
+      res.redirect("http://" + req.headers.host.slice(4) + req.url, 301);
+    } else {
+      next();
+    }
+  });
+
 	app.get('/', home.index);
   app.get('/upload', ensureAuthenticated, home.upload)
   app.post('/upload', ensureAuthenticated, home.save)
